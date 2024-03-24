@@ -4,29 +4,75 @@ O seguinte comando cria um projeto com vite, substitua <div style="color:blue">n
 -selecione a opção -selecione a opção ``<div style="color:cyan;">React</div>`` na lista de frameworks <br>
 -selecione a opção ``<div style="color:yellow;">JavaScript</div>`` na lista de linguagens.
 <br>
+
 # Roteamento de páginas
 ## Adicionando react-router-dom
 Seguinte comando instala o pacote do react-router-dom
 ```npm install react-router-dom```
 <br>
-Crie um arquivo chamado de AppRouter.jsx, que terá a função de adicionar rota as paginas.
+
+Edite o arquivo `<div style="color:yellow;">src/main.jsx</div>`
 ```
-  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-  import Home from './pages/Home';
-  import Login from './pages/login';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
 
-  // Função para Criar roteador de rotas
-  const AppRouter = () => {
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </Router>
-    );
-  };
+// Importando Componentes para criar roteador
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-  export default AppRouter;
+// Importando Páginas localizadas na pasta ./pages
+import Home from './pages/home';
+import Login from './pages/login';
+
+// Criando variável de rotas
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home/>,
+  },
+  {
+    path: "/login",
+    element: <Login/>,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("app")).render(
+  <React.StrictMode>
+    // Iniciando o roteador com as configurações da rota
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
 ```
 
+## Criando Layout padrão em `<div style="color:blue;">pages/root.jsx</div>`.
+```
+export default function Root(){
+  return(
+    <>
+    </>
+  )
+}
+```
+
+## Criando página de erro em `<div style="color:blue;">./error-page.jsx</div>
+```
+import { useRouteError } from "react-router-dom";
+
+export default function ErrorPage() {
+  const error = useRouteError();
+  console.error(error);
+
+  return (
+    <div id="error-page">
+      <h1>Ocorreu um erro</h1>
+      <p>Desculpe, mas acabou ocorrendo um erro.</p>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+    </div>
+  );
+}
+```
