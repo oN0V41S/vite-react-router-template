@@ -1,0 +1,32 @@
+# Criando projeto vite
+O seguinte comando cria um projeto com vite, substitua <div style="color:blue">nomeProjeto</div> pelo nome do seu projeto.
+```npx create-vite@latest <div style="color:blue">nomeProjeto</div>```
+-selecione a opção -selecione a opção ``<div style="color:cyan;">React</div>`` na lista de frameworks <br>
+-selecione a opção ``<div style="color:yellow;">JavaScript</div>`` na lista de linguagens.
+<br>
+# Roteamento de páginas
+## Adicionando react-router-dom
+Seguinte comando instala o pacote do react-router-dom
+```npm install react-router-dom```
+<br>
+Crie um arquivo chamado de AppRouter.jsx, que terá a função de adicionar rota as paginas.
+```
+  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+  import Home from './pages/Home';
+  import Login from './pages/login';
+
+  // Função para Criar roteador de rotas
+  const AppRouter = () => {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Router>
+    );
+  };
+
+  export default AppRouter;
+```
+
